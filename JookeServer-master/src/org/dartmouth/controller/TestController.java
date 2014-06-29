@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.dartmouth.common.CommonUtils;
+import org.dartmouth.common.GlobalVariables;
 import org.dartmouth.domain.EventDO;
 import org.dartmouth.domain.UserDO;
 import org.dartmouth.service.EventService;
@@ -59,30 +60,19 @@ public class TestController {
 			}
 			response.getWriter().append(buffer.toString());
 		} catch (Exception e) {
+			
+			response.getWriter().append("System Error");
 		}
 	}
 
 	@RequestMapping(value = "/test/clearevents")
 	public void clear(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
-		/* @Qiuhan */
-		String userId = request.getParameter("user_id");
-		String userName = request.getParameter("user_name");
-		
-		userId = userId == null ? "000" : userId;
-		userName = userName == null ? "guest" : userName;
-		
-		System.out.println("user name : " + userId + "user name: " + userName);
-		
-		response.getWriter().append(userId + "   " + userName);
-		
-		/* @Qiuhan END */
-		
-//		try {
-//			this.eventService.deleteAll();
-//			response.getWriter().append("done");
-//		} catch (Exception e) {
-//		}
+		try {
+			this.eventService.deleteAll();
+			response.getWriter().append("done");
+		} catch (Exception e) {
+			response.getWriter().append("System Error");
+		}
 	}
 }

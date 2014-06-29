@@ -54,19 +54,19 @@ public class EventServiceImpl implements EventService {
 		// List<EventDO> events = eventCacheService.getEventsByZip(zip);
 
 		List<EventDO> events = new ArrayList<EventDO>();
-		
+
 		// If the zip is not available, get all events
 		if (zip == null) {
 			events = eventDAO.getAll();
-		} else {   // Get events based on the zip code
+		} else { // Get events based on the zip code
 			events = eventDAO.getEventByEventZipCode(zip);
 		}
-		
+
 		// No event availlable
 		if (events.size() == 0) {
 			return new PriorityQueue<EventDO>();
 		}
-		
+
 		PriorityQueue<EventDO> queue = new PriorityQueue<EventDO>(
 				events.size(), new Comparator<EventDO>() {
 					@Override
@@ -118,6 +118,10 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public void deleteAll() {
+		// clear from cache
+		EventCheckingThread.g_eventCache.clearMemory();
+		
+		// clear the database
 		this.eventDAO.clearAll();
 	}
 

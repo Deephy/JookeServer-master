@@ -15,6 +15,7 @@ import org.dartmouth.common.Result;
 import org.dartmouth.dao.EventDAO;
 import org.dartmouth.domain.EventDO;
 import org.dartmouth.domain.ParticipantDO;
+import org.dartmouth.setup.EventCheckingThread;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -222,6 +223,8 @@ public class EventDAOImpl implements EventDAO {
 		return result;
 	}
 
+	
+	
 	@Override
 	public List<EventDO> getAll() {
 		// TODO Auto-generated method stub
@@ -233,6 +236,10 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public int clearAll() {
 		// TODO Auto-generated method stub
+		
+		// clear from the database
+		String sqlDelete = "truncate table event_table";		
+		jdbcTemplateEvent.update(sqlDelete);
 		return 0;
 	}
 

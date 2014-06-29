@@ -1,0 +1,29 @@
+/*---------------6/24--------------*/
+
+1. Migrate event cache to database
+
+   1) Create EventDAO and EventDAOImpl
+   2) Create DB table
+
+
+2. Send mail 
+
+   1) modify the application Context
+   2) create a package org.dartmouth.mail
+
+
+3. Start a fake servlet at startup 
+
+   1) create a package org.dartmouth.setup
+
+   2) in web.xml add one more servlet "StartServer"
+  
+
+
+
+/*---------------6/25--------------*/ 
+
+1. start a thread in setup servlet
+   
+   1) org.dartmouth.setup
+      create EventCheckingThread

@@ -1,0 +1,37 @@
+
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<import resource="service.xml" />
+	<import resource="dao.xml" />
+
+	<!-- SET default mail properties -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtpout.secureserver.net" />
+		<property name="port" value="25" />
+		<property name="username" value="no-reply@jooke.it" />
+		<property name="password" value="bluewin3" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">false</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	
+	<!--  Render the jsp -->
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+</beans>  
